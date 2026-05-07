@@ -1,0 +1,579 @@
+/* AdminAddEmployee CSS */
+
+.add-employee-page {
+  max-width: 900px;
+  margin: 0px auto;
+  padding: 5px;
+}
+
+.form-header {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #185a9d 0%, #43cea2 100%);
+  padding: 10px 0px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.message {
+  padding: 11px 16px;
+  margin-bottom: 3px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.message.success {
+  background-color: #e6ffed;
+  color: #057d2f;
+  border: 1px solid #2ecc71;
+  text-transform: uppercase;
+}
+
+.message.error {
+  background-color: #ffe6e6;
+  color: #c0392b;
+  border: 1px solid #e74c3c;
+  text-transform: uppercase;
+}
+
+.add-employee-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: "10px";
+}
+
+.form-row input,
+.form-row select {
+  flex: 1;
+  min-width: 220px;
+  padding: 12px 14px;
+  border: 1px solid #d0d7de;
+  font-size: 11px;
+  background: #fafafa;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: "10px";
+  margin-top: "20px";
+}
+
+.form-row select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: white
+    url("data:image/svg+xml,%3Csvg fill='black' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")
+    no-repeat right 10px center;
+  background-size: 12px;
+}
+
+.form-row input:focus,
+.form-row select:focus {
+  outline: none;
+  border-color: #007bff;
+  background: #fff;
+  box-shadow: 0px 0px 4px rgba(0, 123, 255, 0.3);
+  margin-top: "20px";
+}
+
+.add-employee-form button[type="submit"],
+.add-employee-form button[type="button"] {
+  padding: 12px 20px;
+  font-weight: bold;
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.add-employee-form button[type="submit"] {
+  background: linear-gradient(135deg, #9d1889 0%, #ce4353 100%);
+  transition: all 0.3s ease;
+  color: #fff;
+  margin-bottom: -30px;
+  font-size: 12px;
+}
+
+.add-employee-form button[type="submit"]:hover {
+  background-color: #ccc;
+  color: black;
+}
+
+.add-employee-form button[type="button"] {
+  background: #f1f1f1;
+  color: #333;
+  font-size: 13px;
+}
+
+.add-employee-form button[type="button"]:hover {
+  background: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .add-employee-page {
+    padding: 20px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .form-row input,
+  .form-row select {
+    min-width: 100%;
+  }
+}
+
+.date-input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+}
+
+.date-input-wrapper input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d0d7de;
+  font-size: 11px;
+  background: #fafafa;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.date-placeholder {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: #fafafa;
+}
+
+/*---------------------------------------------------------------*/
+/* Employee Admin CSS */
+
+.dashboard {
+  padding: 30px;
+  height: 88vh;
+  overflow-y: auto;
+}
+
+.header-heading {
+  display: flex;
+  justify-content: space-between;
+  font-size: 25px;
+  text-transform: uppercase;
+  color: #0056b3;
+  font-weight: bold;
+}
+
+.dashboard-paragraph {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #ba2b92;
+  margin-top: 2px;
+}
+
+.filters {
+  margin-top: 25px;
+  display: flex;
+  gap: 20px;
+}
+
+.filters select,
+.filters button {
+  text-transform: uppercase;
+  padding: 8px 30px 8px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid #ccc;
+}
+
+.filters button {
+  padding: 6px 12px;
+}
+
+.filters select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: white
+    url("data:image/svg+xml,%3Csvg fill='black' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")
+    no-repeat right 10px center;
+  background-size: 12px;
+}
+
+.add-employee {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-top: -41px;
+}
+
+.btn-add {
+  padding: 12px 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+  background: #2b5876;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 0px;
+}
+
+.btn-add:hover {
+  background: black;
+}
+
+.btn-reset {
+  background: darkgray;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-reset:hover {
+  background: #333;
+}
+
+.user-table {
+  margin-top: 15px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th,
+.user-table td {
+  padding: 10px;
+  font-size: 12.5px;
+  border: 1px solid #ccc;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.user-table td {
+  font-weight: bold;
+  font-size: 12px;
+  color: #5a5959;
+}
+
+.user-table th {
+  background: #e6e6e6;
+}
+
+.no-users {
+  text-align: center;
+  font-weight: bold;
+}
+
+.actions-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  cursor: pointer;
+  font-size: 15px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.icon-btn:hover {
+  transform: scale(1.2);
+}
+
+.update-icon {
+  color: #d066a9;
+  margin-bottom: 2px;
+}
+
+.update-icon:hover {
+  color: #0056b3;
+}
+
+.edit-employee-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 15px;
+}
+
+.edit-employee-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: black;
+}
+
+.edit-employee-form input,
+.edit-employee-form select,
+.edit-employee-form textarea {
+  margin-top: 6px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  font-size: 10px;
+  color: #333;
+  font-weight: bold;
+  background: #f9f9f9;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+}
+
+.edit-employee-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: white
+    url("data:image/svg+xml,%3Csvg fill='black' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E")
+    no-repeat right 10px center;
+  background-size: 12px;
+}
+
+.edit-employee-form input:focus,
+.edit-employee-form select:focus {
+  outline: none;
+  border-color: #007bff;
+  background: #fff;
+  box-shadow: 0px 0px 4px rgba(0, 123, 255, 0.3);
+}
+
+.edit-actions {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 5px;
+  margin-bottom: -40px;
+}
+
+.edit-actions button {
+  padding: 10px 18px;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 0.2s;
+}
+
+.btn-cancel {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.btn-cancel:hover {
+  background: #c5c5c5;
+}
+
+.btn-save {
+  background: #2b5876;
+  color: white;
+}
+
+.btn-save:hover {
+  background: #0062cc;
+}
+
+.btn-delete {
+  background: linear-gradient(135deg, #a22323 0%, #d54c4c 100%);
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #b52a37;
+}
+
+/* .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  position: relative;
+  background-color: white;
+  padding: 45px 20px;
+  width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
+}
+
+.modal-header {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #185a9d 0%, #43cea2 100%);
+  padding: 10px 0px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.btn-close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: rgb(180, 4, 4);
+  color: white;
+  border: none;
+  padding: 7px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-close:hover {
+  background: rgb(255, 9, 9);
+} */
+
+.modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 999999 !important; /* Very high z-index */
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Force modal to show */
+.modal {
+  position: relative;
+  background-color: white;
+
+  padding: 45px 20px;
+  width: 700px;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
+  display: block;
+  visibility: visible;
+}
+
+/* Fix modal header */
+.modal-header {
+  padding: 5px !important;
+  margin: -20px -20px 20px -20px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+/* Fix close button */
+.btn-close {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  background: #dc3545 !important;
+  color: white !important;
+  border: none !important;
+  padding: 8px 12px !important;
+  cursor: pointer !important;
+  font-weight: bold !important;
+}
+
+.btn-close:hover {
+  background: #c82333 !important;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 10px;
+  margin: 11px 0;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: -13px;
+}
+
+.pagination label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pagination select {
+  padding: 5px 8px;
+  border: 2px solid #ccc;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pagination select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+}
+
+.pagination select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.pagination button {
+  padding: 7px 12px;
+  border: none;
+  font-weight: bold;
+  font-size: 11px;
+  text-transform: uppercase;
+  background: darkgray;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.pagination button:disabled {
+  background-color: darkgray;
+  cursor: not-allowed;
+}
+
+.pagination button:not(:disabled):hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.pagination span {
+  margin: 0 5px;
+  font-weight: bold;
+  color: #6e6d6d;
+}

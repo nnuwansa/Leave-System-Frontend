@@ -1,0 +1,302 @@
+/* Sidebar.css - Updated for Responsive Design */
+
+/* Base Sidebar Styles */
+.sidebar-container {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Desktop Sidebar */
+.sidebar-desktop {
+  position: fixed !important;
+  transform: translateX(0);
+}
+
+/* Mobile Sidebar States */
+.sidebar-mobile-open {
+  transform: translateX(0);
+}
+
+.sidebar-mobile-closed {
+  transform: translateX(-100%);
+}
+
+/* Hover Effects for Menu Items */
+.sidebar-item {
+  transition: all 0.3s ease;
+}
+
+.sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  transform: translateX(3px);
+}
+
+/* Notification Badge Animation */
+.notification-badge {
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-6px) scale(1.05);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.02);
+  }
+  75% {
+    transform: translateY(-1px) scale(1.01);
+  }
+}
+
+/* Pulse animation for notification badges */
+.notification-badge::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 2px solid rgba(220, 53, 69, 0.4);
+  border-radius: inherit;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* Custom Scrollbar for Sidebar */
+.flex-grow-1 {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+}
+
+.flex-grow-1::-webkit-scrollbar {
+  width: 6px;
+}
+
+.flex-grow-1::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.flex-grow-1::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.flex-grow-1::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Mobile Specific Styles */
+@media (max-width: 991.98px) {
+  /* Ensure sidebar is properly positioned on mobile */
+  .sidebar-container {
+    top: 0 !important;
+    height: 100vh !important;
+    z-index: 1050 !important;
+  }
+
+  /* Mobile overlay styles */
+  .sidebar-mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    backdrop-filter: blur(2px);
+  }
+
+  /* Adjust sidebar items for mobile */
+  .sidebar-item {
+    padding: 18px 20px !important;
+    margin-bottom: 15px !important;
+  }
+
+  /* Mobile navigation improvements */
+  .sidebar-item:active {
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: scale(0.98);
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sidebar-container {
+    width: 300px !important;
+  }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 576px) {
+  .sidebar-container {
+    width: 260px !important;
+  }
+
+  .sidebar-item {
+    padding: 16px 18px !important;
+  }
+
+  .sidebar-item span {
+    font-size: 14px !important;
+  }
+}
+
+/* Extra Small Mobile Styles */
+@media (max-width: 480px) {
+  .sidebar-container {
+    width: 240px !important;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-container,
+  .sidebar-item,
+  .notification-badge {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .sidebar-container {
+    border-right: 2px solid #fff;
+  }
+
+  .sidebar-item {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 2px;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+.sidebar-item:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 991.98px) {
+  .sidebar-item {
+    min-height: 48px; /* Minimum touch target size */
+    display: flex;
+    align-items: center;
+  }
+
+  /* Close button styles */
+  .btn-link {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Loading Animation for Sidebar */
+.sidebar-loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.sidebar-loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Smooth Transitions */
+* {
+  box-sizing: border-box;
+}
+
+.sidebar-container * {
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Profile Section Improvements */
+.profile-section {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Logout Section */
+.logout-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+}
+
+/* Active State Improvements */
+.sidebar-item.active {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-left: 4px solid #ffffff !important;
+  font-weight: 600;
+}
+
+.sidebar-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.6) 100%
+  );
+}
+
+/* Gradient Background Enhancements */
+.sidebar-container {
+  background: linear-gradient(180deg, #59ba9b 0%, #185a9d 100%) !important;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 991.98px) {
+    .sidebar-container {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .sidebar-container {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
