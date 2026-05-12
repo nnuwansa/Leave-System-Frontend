@@ -139,32 +139,31 @@ const Settings = ({ user, showMessage }) => {
 
   // ── Password ─────────────────────────────────────────────────────────────
   const handlePasswordChange = async (e) => {
-    e.preventDefault();
-    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
-      if (showMessage) showMessage("Passwords do not match", true);
-      return;
-    }
-    try {
-      setLoading(true);
-      await API.put(`/employee/change-password/${email}`, {
-        oldPassword: passwordForm.oldPassword,
-        newPassword: passwordForm.newPassword,
-      });
-      if (showMessage) showMessage("Password changed successfully!");
-      setPasswordForm({
-        oldPassword: "",
-        newPassword: "",
-        confirmPassword: "",
-      });
-    } catch (err) {
-      const msg = err.message?.toLowerCase().includes("unauthorized")
-        ? "Current password is incorrect"
-        : "Failed to change password";
-      if (showMessage) showMessage(msg, true);
-    } finally {
-      setLoading(false);
-    }
-  };
+  e.preventDefault();
+  if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+    if (showMessage) showMessage("Passwords do not match", true);
+    return;
+  }
+  try {
+    setLoading(true);
+    await API.put(`/employee/change-password`, {   
+      email,                                         
+      oldPassword: passwordForm.oldPassword,
+      newPassword: passwordForm.newPassword,
+    });
+    if (showMessage) showMessage("Password changed successfully!");
+    setPasswordForm({ oldPassword: "", newPassword: "", confirmPassword: "" });
+  } catch (err) {
+    const msg = err.message?.toLowerCase().includes("incorrect") ||
+                err.message?.toLowerCase().includes("wrong")
+      ? "Current password is incorrect"
+      : err.message || "Failed to change password";
+    if (showMessage) showMessage(msg, true);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const isPasswordFormValid = () =>
     passwordForm.oldPassword &&
