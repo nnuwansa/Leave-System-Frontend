@@ -92,9 +92,9 @@ const EmployeeSidebar = ({
     if (!email) return;
 
     try {
-      console.log("Fetching user details for:", email);
+     
       const user = await API.get(`/admin/users/${email}`);
-      console.log("User details fetched:", user);
+      
       setCurrentUser(user);
     } catch (err) {
       console.error("Error fetching current user:", err);
@@ -106,7 +106,7 @@ const EmployeeSidebar = ({
     if (!token) return;
 
     try {
-      console.log("Fetching approval counts...");
+      
 
       let actingCount = 0;
       let supervisingCount = 0;
@@ -115,7 +115,7 @@ const EmployeeSidebar = ({
       // Method 1: Try dashboard counts API
       try {
         const dashboardCounts = await API.get("/leaves/dashboard/counts");
-        console.log("Dashboard counts response:", dashboardCounts);
+        
 
         if (dashboardCounts) {
           actingCount =
@@ -135,9 +135,7 @@ const EmployeeSidebar = ({
             0;
         }
       } catch (err) {
-        console.log(
-          "Dashboard counts API failed, trying direct leave fetching..."
-        );
+        
       }
 
       // Method 2: Direct API calls if dashboard failed
@@ -150,9 +148,7 @@ const EmployeeSidebar = ({
               API.get("/leaves/pending/approval").catch(() => []),
             ]);
 
-          console.log("Direct fetch - Acting leaves:", actingLeaves);
-          console.log("Direct fetch - Supervising leaves:", supervisingLeaves);
-          console.log("Direct fetch - Approval leaves:", approvalLeaves);
+         
 
           actingCount = Array.isArray(actingLeaves) ? actingLeaves.length : 0;
           supervisingCount = Array.isArray(supervisingLeaves)
@@ -175,7 +171,7 @@ const EmployeeSidebar = ({
         total: total,
       };
 
-      console.log("Final approval counts:", counts);
+     
       setApprovalCounts(counts);
       return counts;
     } catch (err) {
@@ -194,7 +190,7 @@ const EmployeeSidebar = ({
       localStorage.removeItem("userName");
       sessionStorage.clear();
 
-      console.log("User logged out successfully");
+     
       navigate("/");
 
       if (setSidebarOpen) {
@@ -209,7 +205,7 @@ const EmployeeSidebar = ({
   // Navigation handler
   const handleNavigation = (item) => {
     try {
-      console.log("Navigating to:", item.route);
+     
 
       if (setActiveTab) {
         setActiveTab(item.id);
@@ -237,7 +233,7 @@ const EmployeeSidebar = ({
   // Effects
   useEffect(() => {
     if (token && email) {
-      console.log("Initializing sidebar...");
+      
       fetchCurrentUser();
       fetchApprovalCounts();
 
@@ -251,7 +247,7 @@ const EmployeeSidebar = ({
 
   useEffect(() => {
     if (activeTab === "approvals") {
-      console.log("Navigated to approvals, refreshing counts...");
+     
       fetchApprovalCounts();
     }
   }, [activeTab]);

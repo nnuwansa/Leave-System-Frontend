@@ -27,8 +27,7 @@ if (!currentConfig.API_BASE_URL) {
     VITE_API_BASE_URL_PROD: import.meta.env.VITE_API_BASE_URL_PROD,
   });
 } else {
-  console.log(`🚀 Running in ${currentEnv} mode`);
-  console.log(`📡 API Base URL: ${currentConfig.API_BASE_URL}`);
+  
 }
 
 // Named exports

@@ -10,7 +10,7 @@ const MaternityLeaveCard = ({ leave, onDataChange, showDebugInfo = false }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  console.log("🔍 Full leave object:", leave);
+  
 
   // Calculate days since approval
   const calculateDaysSinceApproval = (leave) => {

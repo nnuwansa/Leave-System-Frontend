@@ -151,14 +151,7 @@ const SubmitLeaveRequest = ({
 
       setApprovalOfficers(approvalList);
 
-      // console.log(
-      //   `✅ Acting officers (${actingList.length}):`,
-      //   actingList.map((o) => o.name + " [" + o.department + "]")
-      // );
-      // console.log(
-      //   `✅ Approval officers (${approvalList.length}):`,
-      //   approvalList.map((o) => o.name + " [" + o.department + "]")
-      // );
+      
     } catch (err) {
       console.error("Error fetching department officers:", err);
       showMessage("Failed to fetch department officers", true);

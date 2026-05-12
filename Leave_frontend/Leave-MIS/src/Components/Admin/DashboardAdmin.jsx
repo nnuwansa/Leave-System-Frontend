@@ -114,7 +114,7 @@ const DashboardAdmin = () => {
 
   // Handle maternity leave data changes
   const handleMaternityDataChange = () => {
-    console.log("Refreshing dashboard data...");
+    
     loadDashboardData();
   };
 

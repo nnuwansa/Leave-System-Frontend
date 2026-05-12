@@ -34,7 +34,7 @@ export const apiCall = async (endpoint, options = {}) => {
   const url = `${API_BASE_URL}${endpoint}`;
 
   try {
-    console.log(`📤 ${config.method} ${url}`);
+   
 
     const response = await fetch(url, config);
     const contentType = response.headers.get("content-type");
@@ -53,7 +53,7 @@ export const apiCall = async (endpoint, options = {}) => {
       );
     }
 
-    console.log(`✅ ${config.method} ${endpoint} - ${response.status}`);
+    
     return data;
   } catch (error) {
     console.error(`API Error [${endpoint}]:`, error.message);

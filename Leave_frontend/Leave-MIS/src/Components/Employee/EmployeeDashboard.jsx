@@ -60,7 +60,7 @@ const EmployeeDashboard = () => {
   const fetchDashboardCounts = async () => {
     try {
       const counts = await API.get("/leaves/dashboard/counts");
-      console.log("Dashboard counts received:", counts);
+      
       setDashboardCounts(
         counts || {
           pendingAsActingOfficer: 0,
@@ -80,7 +80,7 @@ const EmployeeDashboard = () => {
       return;
     }
 
-    console.log("Initializing dashboard for user:", email);
+    
     fetchCurrentUser();
     fetchDashboardCounts();
   }, [email, token]);

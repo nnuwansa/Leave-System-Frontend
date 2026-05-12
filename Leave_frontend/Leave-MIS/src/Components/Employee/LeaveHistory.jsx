@@ -1006,10 +1006,10 @@ const LeaveHistory = () => {
       // Remove the item to trigger storage event
       localStorage.removeItem(tempKey);
     } catch (e) {
-      console.log("Could not trigger storage event");
+      
     }
 
-    console.log("Dashboard refresh triggered after leave cancellation");
+    
   };
 
   // Fetch current user
@@ -1093,9 +1093,7 @@ const LeaveHistory = () => {
           "Leave cancelled successfully. Your entitlements have been updated."
         );
 
-        console.log(
-          "Leave cancelled successfully, dashboard refresh triggered"
-        );
+        
       } else {
         throw new Error(result || "Failed to cancel leave");
       }

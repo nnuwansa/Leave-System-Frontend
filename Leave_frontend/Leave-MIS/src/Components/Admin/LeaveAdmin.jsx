@@ -128,10 +128,10 @@ export default function LeaveAdmin() {
     if (token) {
       try {
         const payload = JSON.parse(atob(token.split(".")[1]));
-        console.log("Token payload:", payload);
-        console.log("User roles:", payload.roles || "No roles found");
+       
+        
       } catch (e) {
-        console.log("Could not decode token:", e);
+        
       }
     }
   };
@@ -148,7 +148,7 @@ export default function LeaveAdmin() {
           "Content-Type": "application/json",
         },
       });
-      console.log("Maternity leaves response:", res.data);
+      
       setMaternityLeaves(res.data || []);
     } catch (err) {
       console.error(
@@ -161,20 +161,12 @@ export default function LeaveAdmin() {
         const isApproved = leave.status === "APPROVED";
         const noEndDate = !leave.endDate || leave.endDate === null;
 
-        console.log(`Leave ${leave.id}:`, {
-          type: leave.leaveType,
-          status: leave.status,
-          endDate: leave.endDate,
-          shouldInclude: isMaternity && isApproved && noEndDate,
-        });
+       
 
         return isMaternity && isApproved && noEndDate;
       });
 
-      console.log(
-        "Filtered maternity leaves from main data:",
-        maternityFromLeaves
-      );
+     
       setMaternityLeaves(maternityFromLeaves);
     } finally {
       setMaternityLoading(false);
@@ -186,8 +178,7 @@ export default function LeaveAdmin() {
     try {
       const token = localStorage.getItem("token");
 
-      console.log("Attempting to set end date for leave:", leaveId);
-      console.log("End date form:", endDateForm);
+      
 
       const response = await API.post(
         `/leaves/admin/maternity/${leaveId}/set-end-date`,
