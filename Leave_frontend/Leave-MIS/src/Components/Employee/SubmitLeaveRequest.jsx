@@ -136,8 +136,22 @@ const SubmitLeaveRequest = ({
         ? data.acting.sort((a, b) => a.name.localeCompare(b.name))
         : [];
 
-      setActingOfficers(actingList);
-      setSupervisingOfficers(actingList);
+      // setActingOfficers(actingList);
+      // setSupervisingOfficers(actingList);
+
+      
+           //  Acting: same department (data.acting from backend)
+const acting = Array.isArray(data.acting)
+  ? data.acting.sort((a, b) => a.name.localeCompare(b.name))
+  : [];
+setActingOfficers(acting);
+
+//  Supervising: other departments only (data.supervising from backend)
+const supervising = Array.isArray(data.supervising)
+  ? data.supervising.sort((a, b) => a.name.localeCompare(b.name))
+  : [];
+setSupervisingOfficers(supervising);
+
 
       // ✅ Approval: ALL departments officers
       const approvalList = Array.isArray(allData.approval)
