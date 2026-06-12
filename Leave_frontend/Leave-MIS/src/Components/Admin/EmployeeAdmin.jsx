@@ -212,7 +212,8 @@ export default function EmployeeAdmin() {
       }
     };
 
-    const availableForOther = departmentsFromDB.filter((dept) => dept.name !== formData.department);
+    // const availableForOther = departmentsFromDB.filter((dept) => dept.name !== formData.department);
+    const availableForOther = departmentsFromDB;
 
     return (
       <form onSubmit={handleSubmit} className="edit-employee-form">

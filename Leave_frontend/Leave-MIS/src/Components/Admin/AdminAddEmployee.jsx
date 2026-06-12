@@ -72,6 +72,15 @@ export default function AdminAddEmployee({ onSuccess }) {
     }));
   };
 
+  // Chips list = all departments except the selected primary
+  
+  // const otherDeptOptions = departments.filter(
+  //   (d) => d.name && d.name !== formData.department
+  // );
+
+const otherDeptOptions = departments.filter((d) => d.name);
+
+
   // Toggle a department chip on/off in otherDepartments
   const toggleOtherDepartment = (deptName) => {
     setFormData((prev) => {
@@ -153,10 +162,7 @@ export default function AdminAddEmployee({ onSuccess }) {
     }
   };
 
-  // Chips list = all departments except the selected primary
-  const otherDeptOptions = departments.filter(
-    (d) => d.name && d.name !== formData.department
-  );
+
 
   return (
     <div className="add-employee-page">
