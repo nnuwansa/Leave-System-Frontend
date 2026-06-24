@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import {
   FaPlus, FaEdit, FaTrash, FaSave, FaDownload,
@@ -443,11 +444,11 @@ const LeaveHistorySummary = () => {
                 <div style={{ border:"1px solid #e9ecef", borderRadius:"8px", padding:"16px" }}>
                   <h4 style={{ color:"#007bff", marginTop:0, marginBottom:"12px" }}>Casual Leave</h4>
                   <label style={{ display:"block", marginBottom:"4px", fontSize:"13px" }}>Used Days:</label>
-                  <input type="number" min="0" value={formData.casualUsed}
+                  <input type="number" min="0" step="0.5" value={formData.casualUsed}
                     onChange={e=>setFormData(p=>({...p,casualUsed:Number(e.target.value)}))}
                     style={{ width:"100%", padding:"6px", border:"1px solid #ccc", borderRadius:"4px", marginBottom:"8px" }} />
                   <label style={{ display:"block", marginBottom:"4px", fontSize:"13px" }}>Total Days:</label>
-                  <input type="number" min="0" value={formData.casualTotal}
+                  <input type="number" min="0" step="0.5" value={formData.casualTotal}
                     onChange={e=>setFormData(p=>({...p,casualTotal:Number(e.target.value)}))}
                     style={{ width:"100%", padding:"6px", border:"1px solid #ccc", borderRadius:"4px" }} />
                 </div>
@@ -456,11 +457,11 @@ const LeaveHistorySummary = () => {
                 <div style={{ border:"1px solid #e9ecef", borderRadius:"8px", padding:"16px" }}>
                   <h4 style={{ color:"#28a745", marginTop:0, marginBottom:"12px" }}>Vacation Leave</h4>
                   <label style={{ display:"block", marginBottom:"4px", fontSize:"13px" }}>Used Days:</label>
-                  <input type="number" min="0" value={formData.sickUsed}
+                  <input type="number" min="0" step="0.5" value={formData.sickUsed}
                     onChange={e=>setFormData(p=>({...p,sickUsed:Number(e.target.value)}))}
                     style={{ width:"100%", padding:"6px", border:"1px solid #ccc", borderRadius:"4px", marginBottom:"8px" }} />
                   <label style={{ display:"block", marginBottom:"4px", fontSize:"13px" }}>Total Days:</label>
-                  <input type="number" min="0" value={formData.sickTotal}
+                  <input type="number" min="0" step="0.5" value={formData.sickTotal}
                     onChange={e=>setFormData(p=>({...p,sickTotal:Number(e.target.value)}))}
                     style={{ width:"100%", padding:"6px", border:"1px solid #ccc", borderRadius:"4px" }} />
                 </div>
@@ -469,7 +470,7 @@ const LeaveHistorySummary = () => {
                 <div style={{ border:"1px solid #e9ecef", borderRadius:"8px", padding:"16px" }}>
                   <h4 style={{ color:"#dc3545", marginTop:0, marginBottom:"12px" }}>Duty Leave</h4>
                   <label style={{ display:"block", marginBottom:"4px", fontSize:"13px" }}>Used Days:</label>
-                  <input type="number" min="0" value={formData.dutyUsed}
+                  <input type="number" min="0" step="0.5" value={formData.dutyUsed}
                     onChange={e=>setFormData(p=>({...p,dutyUsed:Number(e.target.value)}))}
                     style={{ width:"100%", padding:"6px", border:"1px solid #ccc", borderRadius:"4px" }} />
                   <p style={{ fontSize:"11px", color:"#888", marginTop:"6px" }}>(Unlimited entitlement)</p>
