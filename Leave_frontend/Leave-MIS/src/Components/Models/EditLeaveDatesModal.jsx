@@ -306,9 +306,8 @@ const EditLeaveDatesModal = ({ show, onHide, leave, onSave }) => {
           >
             <Info size={13} className="flex-shrink-0 mt-1" />
             <span>
-              Only <strong>future pending or approved leaves</strong> can be
-              edited. All assigned officers will be notified of the date change
-              via email. Leave entitlements are automatically recalculated.
+              Only <strong>future pending leaves</strong> can be
+              edited. 
             </span>
           </div>
         </div>
