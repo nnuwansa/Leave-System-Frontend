@@ -242,13 +242,28 @@ setSupervisingOfficers(supervising);
     }
 
     // Officer uniqueness
-    const selectedOfficers = [
-      leaveForm.actingOfficerEmail,
-      leaveForm.supervisingOfficerEmail,
-      leaveForm.approvalOfficerEmail,
-    ].filter((e) => e && e !== "" && e !== "NONE");
-    if (selectedOfficers.length !== new Set(selectedOfficers).size) {
-      showMessage("Please select different officers for each role!", true);
+    // const selectedOfficers = [
+    //   leaveForm.actingOfficerEmail,
+    //   leaveForm.supervisingOfficerEmail,
+    //   leaveForm.approvalOfficerEmail,
+    // ].filter((e) => e && e !== "" && e !== "NONE");
+    // if (selectedOfficers.length !== new Set(selectedOfficers).size) {
+    //   showMessage("Please select different officers for each role!", true);
+    //   return;
+    // }
+
+    // Officer uniqueness — Approval officer must differ from Acting/Supervising,
+    // but Acting and Supervising officers are allowed to be the same person.
+    const approvalEmail = leaveForm.approvalOfficerEmail;
+    const actingEmail = leaveForm.actingOfficerEmail;
+    const supervisingEmail = leaveForm.supervisingOfficerEmail;
+
+    const conflictsWithApproval = [actingEmail, supervisingEmail].some(
+      (e) => e && e !== "" && e !== "NONE" && e === approvalEmail
+    );
+
+    if (conflictsWithApproval) {
+      showMessage("Approval Officer must be different from Acting/Supervising Officer!", true);
       return;
     }
 
