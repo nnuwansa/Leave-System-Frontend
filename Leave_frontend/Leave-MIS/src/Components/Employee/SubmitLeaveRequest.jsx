@@ -516,10 +516,11 @@ setSupervisingOfficers(supervising);
                       <option value="">{supervisingOfficers.length === 0 ? "Loading..." : "Select Supervising Officer"}</option>
                       <option value="NONE">None</option>
                       {supervisingOfficers
-                        .filter((o) => o.email !== leaveForm.actingOfficerEmail)
+                        // .filter((o) => o.email !== leaveForm.actingOfficerEmail)
                         .map((o) => (
                           <option key={o.email} value={o.email}>{formatOfficerName(o)}</option>
                         ))}
+                        
                     </select>
                   </div>
 
