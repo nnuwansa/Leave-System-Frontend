@@ -60,7 +60,7 @@ const DashboardAdmin = () => {
           // Get recent leaves
           const recentLeaves = leaves
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-            .slice(0, 10);
+            .slice(0, 6);
 
           setDashboardData((prev) => ({
             ...prev,
@@ -482,7 +482,7 @@ const DashboardAdmin = () => {
       </h5>
     </div>
 
-    <div style={{ display: "grid", gap: "12px" }}>
+    <div style={{ display: "grid", gap: "12px", gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))", }}>
       {dashboardData.recentLeaves.map((leave) => {
         // Status badge colors
         const statusColors = {
