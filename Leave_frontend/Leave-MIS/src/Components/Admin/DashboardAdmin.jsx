@@ -464,31 +464,201 @@ const DashboardAdmin = () => {
 
       {!loadingStates.leaves && dashboardData.recentLeaves.length > 0 && (
   <div style={{ marginTop: "30px" }}>
-    <h5 style={{ marginBottom: "15px" }}>Recent Leave Requests</h5>
-    <div style={{ display: "grid", gap: "10px" }}>
-      {dashboardData.recentLeaves.map((leave) => (
-        <div
-          key={leave.id}
-          style={{
-            padding: "12px 16px",
-            border: "1px solid #eee",
-            borderRadius: "8px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div>
-            <strong>{leave.employeeName || leave.employee?.name}</strong>
-            <div style={{ fontSize: "13px", color: "#666" }}>
-              {leave.leaveType} — {leave.status}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+        marginBottom: "20px",
+        padding: "15px",
+        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        borderRadius: "8px",
+        color: "white",
+      }}
+    >
+      <FaCalendarCheck size={22} />
+      <h5 style={{ margin: 0 }}>
+        Recent Leave Requests ({dashboardData.recentLeaves.length})
+      </h5>
+    </div>
+
+    <div style={{ display: "grid", gap: "12px" }}>
+      {dashboardData.recentLeaves.map((leave) => {
+        // Status badge colors
+        const statusColors = {
+          APPROVED: { bg: "#e6f7ed", text: "#1e8e4f", border: "#a3e6be" },
+          PENDING: { bg: "#fff8e1", text: "#b8860b", border: "#f5deb3" },
+          PENDING_ACTING: { bg: "#fff8e1", text: "#b8860b", border: "#f5deb3" },
+          PENDING_APPROVAL: { bg: "#fff8e1", text: "#b8860b", border: "#f5deb3" },
+          REJECTED: { bg: "#fde8e8", text: "#c0392b", border: "#f5b7b1" },
+          CANCELLED: { bg: "#f0f0f0", text: "#777", border: "#ddd" },
+        };
+        const statusStyle =
+          statusColors[leave.status] ||
+          { bg: "#eef2f7", text: "#555", border: "#ddd" };
+
+        // Leave type colors/labels
+        const leaveTypeLabels = {
+          MATERNITY: "🤱 Maternity",
+          HALF_DAY: "🕐 Half Day",
+          CASUAL: "🌴 Casual",
+          SICK: "🤒 Sick",
+          ANNUAL: "📅 Annual",
+        };
+        const leaveTypeLabel =
+          leaveTypeLabels[leave.leaveType] || leave.leaveType;
+
+        return (
+          <div
+            key={leave.id}
+            style={{
+              padding: "16px 20px",
+              background: "white",
+              border: "1px solid #ececec",
+              borderRadius: "10px",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+              transition: "box-shadow 0.2s ease",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                flexWrap: "wrap",
+                gap: "10px",
+              }}
+            >
+              {/* Left: employee info */}
+              <div style={{ flex: "1", minWidth: "200px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "4px",
+                  }}
+                >
+                  <strong style={{ fontSize: "15px", color: "#222" }}>
+                    {leave.employeeFullName || leave.employeeName}
+                  </strong>
+                  {leave.isCancelled && (
+                    <span
+                      style={{
+                        fontSize: "11px",
+                        color: "#c0392b",
+                        fontWeight: 600,
+                      }}
+                    >
+                      (Cancelled)
+                    </span>
+                  )}
+                </div>
+                <div style={{ fontSize: "13px", color: "#777" }}>
+                  {leave.employeeDesignation}
+                  {leave.department ? ` • ${leave.department}` : ""}
+                </div>
+              </div>
+
+              {/* Right: status badge */}
+              <span
+                style={{
+                  padding: "4px 12px",
+                  borderRadius: "20px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  background: statusStyle.bg,
+                  color: statusStyle.text,
+                  border: `1px solid ${statusStyle.border}`,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {leave.status}
+              </span>
             </div>
+
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "16px",
+                marginTop: "12px",
+                paddingTop: "12px",
+                borderTop: "1px solid #f2f2f2",
+                fontSize: "13px",
+                color: "#555",
+              }}
+            >
+              <div>
+                <span style={{ color: "#999" }}>Type: </span>
+                {leaveTypeLabel}
+              </div>
+
+              {leave.leaveDuration && (
+                <div>
+                  <span style={{ color: "#999" }}>Duration: </span>
+                  {leave.leaveDuration}
+                </div>
+              )}
+
+              {leave.endDate && (
+                <div>
+                  <span style={{ color: "#999" }}>End Date: </span>
+                  {new Date(leave.endDate).toLocaleDateString()}
+                </div>
+              )}
+
+              <div>
+                <span style={{ color: "#999" }}>Requested: </span>
+                {new Date(leave.createdAt).toLocaleDateString()}
+              </div>
+            </div>
+
+            {leave.reason && (
+              <div
+                style={{
+                  marginTop: "10px",
+                  fontSize: "13px",
+                  color: "#444",
+                  background: "#fafafa",
+                  padding: "8px 12px",
+                  borderRadius: "6px",
+                }}
+              >
+                <span style={{ color: "#999" }}>Reason: </span>
+                {leave.reason}
+              </div>
+            )}
+
+            {(leave.actingOfficerName || leave.approvalOfficerName) && (
+              <div
+                style={{
+                  marginTop: "10px",
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "16px",
+                  fontSize: "12px",
+                  color: "#888",
+                }}
+              >
+                {leave.actingOfficerName && (
+                  <div>
+                    Acting Officer: <strong>{leave.actingOfficerName}</strong>{" "}
+                    ({leave.actingOfficerStatus})
+                  </div>
+                )}
+                {leave.approvalOfficerName && (
+                  <div>
+                    Approval Officer:{" "}
+                    <strong>{leave.approvalOfficerName}</strong> (
+                    {leave.approvalOfficerStatus})
+                  </div>
+                )}
+              </div>
+            )}
           </div>
-          <div style={{ fontSize: "13px", color: "#999" }}>
-            {new Date(leave.createdAt).toLocaleDateString()}
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </div>
 )}
