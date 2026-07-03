@@ -461,6 +461,37 @@ const DashboardAdmin = () => {
     `}</style>
         </div>
       )}
+
+      {!loadingStates.leaves && dashboardData.recentLeaves.length > 0 && (
+  <div style={{ marginTop: "30px" }}>
+    <h5 style={{ marginBottom: "15px" }}>Recent Leave Requests</h5>
+    <div style={{ display: "grid", gap: "10px" }}>
+      {dashboardData.recentLeaves.map((leave) => (
+        <div
+          key={leave.id}
+          style={{
+            padding: "12px 16px",
+            border: "1px solid #eee",
+            borderRadius: "8px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <strong>{leave.employeeName || leave.employee?.name}</strong>
+            <div style={{ fontSize: "13px", color: "#666" }}>
+              {leave.leaveType} — {leave.status}
+            </div>
+          </div>
+          <div style={{ fontSize: "13px", color: "#999" }}>
+            {new Date(leave.createdAt).toLocaleDateString()}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
     </div>
   );
 };
