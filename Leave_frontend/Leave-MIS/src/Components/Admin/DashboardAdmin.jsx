@@ -471,7 +471,7 @@ const DashboardAdmin = () => {
         gap: "10px",
         marginBottom: "20px",
         padding: "15px",
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        background: "linear-gradient(165deg, #6cc2a7 0%, #16b07d 100%)",
         borderRadius: "8px",
         color: "white",
       }}
@@ -499,11 +499,11 @@ const DashboardAdmin = () => {
 
         // Leave type colors/labels
         const leaveTypeLabels = {
-          MATERNITY: "🤱 Maternity",
-          HALF_DAY: "🕐 Half Day",
-          CASUAL: "🌴 Casual",
-          SICK: "🤒 Sick",
-          ANNUAL: "📅 Annual",
+          MATERNITY: " Maternity",
+          HALF_DAY: " Half Day",
+          CASUAL: " Casual",
+          SICK: " Sick",
+          ANNUAL: " Annual",
         };
         const leaveTypeLabel =
           leaveTypeLabels[leave.leaveType] || leave.leaveType;
