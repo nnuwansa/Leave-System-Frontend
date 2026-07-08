@@ -89,12 +89,18 @@ const ActionButton = ({ leave, onCancelClick, onEditDatesClick, canEditDates }) 
   };
 
   const cancelable = canCancel();
+  // const editable =
+  // canEditDates === true &&
+  // !leave.isShortLeave &&
+  // !leave.status?.includes("CANCELLED") &&
+  // !leave.status?.includes("REJECTED") &&
+  // leave.status !== "APPROVED";
+
   const editable =
   canEditDates === true &&
-  !leave.isShortLeave &&
   !leave.status?.includes("CANCELLED") &&
   !leave.status?.includes("REJECTED") &&
-  leave.status !== "APPROVED";
+  leave.status !== "APPROVED";   // keep or relax depending on whether approved short/half-day should be editable
 
   if (!cancelable && !editable) {
     let message = "Cannot cancel";
