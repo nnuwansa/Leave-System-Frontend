@@ -377,18 +377,31 @@ const EditLeaveDatesModal = ({ show, onHide, leave, onSave }) => {
   const isRegular  = !isShort && !isHalfDay;
 
   // ── Reset whenever modal opens ──
+  // useEffect(() => {
+  //   if (leave && show) {
+  //     setStartDate(leave.startDate ? leave.startDate.split("T")[0] : "");
+  //     setEndDate(leave.endDate ? leave.endDate.split("T")[0] : "");
+  //     setStartTime(leave.shortLeaveStartTime || leave.halfDayStartTime || "");
+  //     setEndTime(leave.shortLeaveEndTime || leave.halfDayEndTime || "");
+  //     setHalfDayPeriod(leave.halfDayPeriod || "MORNING");
+  //     setReason("");
+  //     setError("");
+  //     setWorkingDaysInfo(null);
+  //   }
+  // }, [leave, show]);
+
   useEffect(() => {
-    if (leave && show) {
-      setStartDate(leave.startDate ? leave.startDate.split("T")[0] : "");
-      setEndDate(leave.endDate ? leave.endDate.split("T")[0] : "");
-      setStartTime(leave.shortLeaveStartTime || leave.halfDayStartTime || "");
-      setEndTime(leave.shortLeaveEndTime || leave.halfDayEndTime || "");
-      setHalfDayPeriod(leave.halfDayPeriod || "MORNING");
-      setReason("");
-      setError("");
-      setWorkingDaysInfo(null);
-    }
-  }, [leave, show]);
+  if (leave && show) {
+    setStartDate(leave.startDate ? leave.startDate.split("T")[0] : "");
+    setEndDate(leave.endDate ? leave.endDate.split("T")[0] : "");
+    setStartTime((leave.shortLeaveStartTime || leave.halfDayStartTime || "").slice(0, 5));
+    setEndTime((leave.shortLeaveEndTime || leave.halfDayEndTime || "").slice(0, 5));
+    setHalfDayPeriod(leave.halfDayPeriod || "MORNING");
+    setReason("");
+    setError("");
+    setWorkingDaysInfo(null);
+  }
+}, [leave, show]);
 
   // ── Auto-calculate working days (regular leave only) ──
   useEffect(() => {

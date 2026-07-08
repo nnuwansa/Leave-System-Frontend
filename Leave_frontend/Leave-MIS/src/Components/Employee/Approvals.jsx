@@ -143,7 +143,7 @@ const MobileApprovalCard = ({ leave, employeeDetails, onApprove, onReject, loadi
             : leave.leaveType==="SHORT"||leave.leaveType==="SHORT_LEAVE" ? new Date(leave.startDate).toLocaleDateString()
             : `${new Date(leave.startDate).toLocaleDateString()} → ${new Date(leave.endDate).toLocaleDateString()}`}
         </div>
-        <div className="small text-muted"><Clock size={12} className="me-1" />{calculateDuration(leave.leaveType,leave.startDate,leave.endDate,leave.shortLeaveStartTime,leave.shortLeaveEndTime,leave.halfDayPeriod)}</div>
+        <div className="small text-muted"><Clock size={12} className="me-1" />{calculateDuration(leave.leaveType,leave.startDate,leave.endDate,leave.shortLeaveStartTime,leave.shortLeaveEndTime,leave.halfDayPeriod,leave.halfDayStartTime, leave.halfDayEndTime  )}</div>
       </div>
       {leave.reason && <div className="mb-2"><div className="small text-muted mb-1"><MessageSquare size={10} className="me-1" />Reason:</div><div className="small text-dark">{leave.reason}</div></div>}
       <div className="mb-3"><div className="small text-muted mb-2">Approval Chain:</div><ApprovalFlow leave={leave} employeeDetails={employeeDetails} isCompact={true} isMobile={true} /></div>
@@ -261,16 +261,42 @@ const Approvals = () => {
 
   const getLeaveTypeDisplayName = (t) => ({CASUAL:"CASUAL LEAVE",SICK:"VACATION LEAVE",MATERNITY:"MATERNITY LEAVE",SHORT:"SHORT LEAVE",HALF_DAY:"HALF DAY LEAVE"}[t]||t?.replace("_"," ")||"");
 
-  const calculateDuration = (leaveType,startDate,endDate,shortStart,shortEnd,halfDayPeriod,workingDays) => {
-    if (leaveType==="HALF_DAY") return `0.5 day (${halfDayPeriod||"MORNING"} period)`;
-    if (leaveType==="SHORT"||leaveType==="SHORT_LEAVE") {
-      if (shortStart&&shortEnd){const s=new Date(`${startDate}T${shortStart}`);const e=new Date(`${startDate}T${shortEnd}`);return `${((e-s)/3600000).toFixed(2)} hours (${s.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})} - ${e.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})})`;}
-      return "Short duration";
+  // const calculateDuration = (leaveType,startDate,endDate,shortStart,shortEnd,halfDayPeriod,workingDays) => {
+  //   if (leaveType==="HALF_DAY") return `0.5 day (${halfDayPeriod||"MORNING"} period)`;
+  //   if (leaveType==="SHORT"||leaveType==="SHORT_LEAVE") {
+  //     if (shortStart&&shortEnd){const s=new Date(`${startDate}T${shortStart}`);const e=new Date(`${startDate}T${shortEnd}`);return `${((e-s)/3600000).toFixed(2)} hours (${s.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})} - ${e.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})})`;}
+  //     return "Short duration";
+  //   }
+  //   if (workingDays&&workingDays>0) return `${workingDays} working day${workingDays!==1?"s":""}`;
+  //   const days=Math.round((new Date(endDate)-new Date(startDate))/86400000)+1;
+  //   return days===1?"1 day":`${days} days`;
+  // };
+  const formatTimeDisplay = (time) => {
+  if (!time) return null;
+  const [h, m] = time.split(":");
+  const d = new Date();
+  d.setHours(Number(h), Number(m));
+  return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+};
+
+const calculateDuration = (leaveType,startDate,endDate,shortStart,shortEnd,halfDayPeriod,workingDays,halfDayStart,halfDayEnd) => {
+  if (leaveType==="HALF_DAY") {
+    const period = halfDayPeriod || "MORNING";
+    if (halfDayStart && halfDayEnd) {
+      const s = formatTimeDisplay(halfDayStart);
+      const e = formatTimeDisplay(halfDayEnd);
+      return `0.5 day (${period} · ${s} - ${e})`;
     }
-    if (workingDays&&workingDays>0) return `${workingDays} working day${workingDays!==1?"s":""}`;
-    const days=Math.round((new Date(endDate)-new Date(startDate))/86400000)+1;
-    return days===1?"1 day":`${days} days`;
-  };
+    return `0.5 day (${period} period)`;
+  }
+  if (leaveType==="SHORT"||leaveType==="SHORT_LEAVE") {
+    if (shortStart&&shortEnd){const s=new Date(`${startDate}T${shortStart}`);const e=new Date(`${startDate}T${shortEnd}`);return `${((e-s)/3600000).toFixed(2)} hours (${s.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})} - ${e.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})})`;}
+    return "Short duration";
+  }
+  if (workingDays&&workingDays>0) return `${workingDays} working day${workingDays!==1?"s":""}`;
+  const days=Math.round((new Date(endDate)-new Date(startDate))/86400000)+1;
+  return days===1?"1 day":`${days} days`;
+};
 
   const getRoleIcon  = (role) => role==="Acting Officer"?<User size={isMobile?12:16} className="me-1" />:role==="Supervising Officer"?<UserCog size={isMobile?12:16} className="me-1" />:role==="Approval Officer"?<UserCheck size={isMobile?12:16} className="me-1" />:<Shield size={isMobile?12:16} className="me-1" />;
   const getRoleColor = (role) => role==="Acting Officer"?"bg-info-subtle text-info":role==="Supervising Officer"?"bg-warning-subtle text-warning":role==="Approval Officer"?"bg-success-subtle text-success":"bg-secondary-subtle text-secondary";
@@ -429,7 +455,7 @@ const Approvals = () => {
               : leave.leaveType==="MATERNITY" ? `${new Date(leave.startDate).toLocaleDateString()}${leave.endDate?" → "+new Date(leave.endDate).toLocaleDateString():""}`
               : `${new Date(leave.startDate).toLocaleDateString()} → ${new Date(leave.endDate).toLocaleDateString()}`}
           </div>
-          <div className="small text-muted"><Clock size={12} className="me-1" />{calculateDuration(leave.leaveType,leave.startDate,leave.endDate,leave.shortLeaveStartTime,leave.shortLeaveEndTime,leave.halfDayPeriod,leave.workingDays)}</div>
+          <div className="small text-muted"><Clock size={12} className="me-1" />{calculateDuration(leave.leaveType,leave.startDate,leave.endDate,leave.shortLeaveStartTime,leave.shortLeaveEndTime,leave.halfDayPeriod,leave.workingDays,leave.halfDayStartTime, leave.halfDayEndTime  )}</div>
         </td>
         <td className="py-3 px-0" style={{ minWidth:"300px" }}>
           <ApprovalFlow leave={leave} employeeDetails={employeeDetails} isCompact={false} isMobile={false} />
@@ -631,7 +657,7 @@ const Approvals = () => {
                                       : leave.leaveType==="HALF_DAY" ? `${new Date(leave.startDate).toLocaleDateString()} (${leave.halfDayPeriod||"MORNING"} period)`
                                       : `${new Date(leave.startDate).toLocaleDateString()} → ${new Date(leave.endDate).toLocaleDateString()}`}
                                   </div>
-                                  <div className="small text-muted"><Clock size={12} className="me-1" />{calculateDuration(leave.leaveType,leave.startDate,leave.endDate,leave.shortLeaveStartTime,leave.shortLeaveEndTime,leave.halfDayPeriod,leave.workingDays)}</div>
+                                  <div className="small text-muted"><Clock size={12} className="me-1" />{calculateDuration(leave.leaveType,leave.startDate,leave.endDate,leave.shortLeaveStartTime,leave.shortLeaveEndTime,leave.halfDayPeriod,leave.workingDays,leave.halfDayStartTime, leave.halfDayEndTime  )}</div>
                                 </div>
                               )}
                             </td>
